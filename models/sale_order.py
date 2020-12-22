@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
-# class myaddon(models.Model):
-#     _name = 'myaddon.myaddon'
-#     _description = 'myaddon.myaddon'
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+    _description = 'this is an Addon'
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    payment_mode = fields.Selection(
+        string = "Payment mode",
+        selection=[
+            ('cash', "Cash"),
+            ('bank', "Bank"),
+            ('electronic', "Electronic")
+        ]
+    )
